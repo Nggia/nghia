@@ -1,4 +1,4 @@
-local codes = 
+local codes = {
     "Visit2MNew",
     "SorryforShutdown2New",
     "IloveKeenNew",
