@@ -1,5 +1,4 @@
 Name = "Booga Booga Reborn",
-    HidePremium = true,
     Load = function()
         Orion:MakeNotification({
             Name = "Loaded!",
