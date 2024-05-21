@@ -1,39 +1,138 @@
-local codes = {
-    "Visit2MNew",
-    "SorryforShutdown2New",
-    "IloveKeenNew",
-    "Sub2Jetoza",
-    "ShadowMonarch",
-    "Sub2AekZaJunior",
-    "CodeGlitchedNew",
-    "Sub2RikTime",
-}
+Name = "Booga Booga Reborn",
+    HidePremium = true,
+    Load = function()
+        Orion:MakeNotification({
+            Name = "Loaded!",
+            Content = "GUI loaded successfully!",
+            Time = 5
+        })
+    end
+})
 
-local function inputCode(index)
-    local args = {
-        [1] = codes[index],
-    }
-    game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("UseCode"):FireServer(unpack(args))
-end
+-- Create tabs
+local FarmingTab = GUI:MakeTab({
+    Name = "Farming",
+    
+})
 
-local currentIndex = 1
-local interval = 1
+local MovementTab = GUI:MakeTab({
+    Name = "Movement",
+    
+})
 
-local function inputNextCode()
-    if currentIndex <= #codes then
-        inputCode(currentIndex)
-        currentIndex = currentIndex + 1
-        wait(interval)
-        inputNextCode()
-    else
-        
-        wait(3)
-        
-        for i = 1, 10 do
-            game:GetService("ReplicatedStorage")2:WaitForChild("Remotes"):WaitForChild("SpecialSummonTenRoll"):FireServer()
-            wait(1)
+-- Create sections
+local AutoEatSection = FarmingTab:MakeSection({
+    Name = "Auto Eat"
+})
+
+local AutoSwingSection = FarmingTab:MakeSection({
+    Name = "Auto Swing"
+})
+
+local AutoFarmSection = FarmingTab:MakeSection({
+    Name = "Auto Farm"
+})
+
+local AutoMoveSection = MovementTab:MakeSection({
+    Name = "Auto Move"
+})
+
+local AutoFarmGoldNodesSection = FarmingTab:MakeSection({
+    Name = "Auto Farm Gold Nodes"
+})
+
+-- Create toggles
+local AutoEatToggle = AutoEatSection:MakeToggle({
+    Name = "Auto Eat",
+    Default = true,
+    Callback = function(state)
+        if state then
+            while true do
+                wait(1)
+                for _, food in ipairs(game.Workspace:GetDescendants()) do
+                    if food.Name == "Food" and food.Parent.Name == "PlantBox" then
+                        fireclick(food.ClickDetector)
+                        break
+                    end
+                end
+            end
         end
     end
-end
+})
 
-inputNextCode()
+local AutoSwingToggle = AutoSwingSection:MakeToggle({
+    Name = "Auto Swing",
+    Default = true,
+    Callback = function(state)
+        if state then
+            while true do
+                wait(1)
+                if game.Players.LocalPlayer.Backpack:FindFirstChild("Tool") then
+                    local tool = game.Players.LocalPlayer.Backpack:FindFirstChild("Tool")
+                    game.Players.LocalPlayer.Character.Humanoid:EquipTool(tool)
+                    fireclick(tool.Handle)
+                end
+            end
+        end
+    end
+})
+
+local AutoFarmToggle = AutoFarmSection:MakeToggle({
+    Name = "Auto Farm",
+    Default = true,
+    Callback = function(state)
+        if state then
+            while true do
+                wait(1)
+                for _, plant in ipairs(game.Workspace:GetDescendants()) do
+                    if plant.Name == "Plant" and plant.Parent.Name == "PlantBox" then
+                        fireclick(plant.ClickDetector)
+                        break
+                    end
+                end
+            end
+        end
+    end
+})
+
+local AutoMoveToggle = AutoMoveSection:MakeToggle({
+    Name = "Auto Move",
+    Default = true,
+    Callback = function(state)
+        if state then
+            while true do
+                wait(1)
+                local plantBox = game.Workspace:FindFirstChild("PlantBox")
+                if plantBox then
+                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = plantBox.CFrame
+                    break
+                end
+            end
+            local bush = game.Workspace:FindFirstChild("Bush")
+            if bush then
+                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = bush.CFrame
+            end
+        end
+    end
+})
+
+local AutoFarmGoldNodesToggle = AutoFarmGoldNodesSection:MakeToggle({
+    Name = "Auto Farm Gold Nodes",
+    Default = true,
+    Callback = function(state)
+        if state then
+            while true do
+                wait(1)
+                for _, goldNode in ipairs(game.Workspace:GetDescendants()) do
+                    if goldNode.Name == "GoldNode" then
+                        fireclick(goldNode.ClickDetector)
+                        fireclick(goldNode.ClickDetector)
+                        fireclick(goldNode.ClickDetector)
+                        fireclick(goldNode.ClickDetector)
+                        break
+                    end
+                end
+            end
+        end
+    end
+})
