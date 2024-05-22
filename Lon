@@ -6,39 +6,37 @@ Name = "Booga Booga Reborn",
             Time = 5
         })
     end
-})
 
 -- Create tabs
 local FarmingTab = GUI:MakeTab({
     Name = "Farming",
     
-})
 
 local MovementTab = GUI:MakeTab({
     Name = "Movement",
     
-})
+
 
 -- Create sections
 local AutoEatSection = FarmingTab:MakeSection({
     Name = "Auto Eat"
-})
+
 
 local AutoSwingSection = FarmingTab:MakeSection({
     Name = "Auto Swing"
-})
+
 
 local AutoFarmSection = FarmingTab:MakeSection({
     Name = "Auto Farm"
-})
+
 
 local AutoMoveSection = MovementTab:MakeSection({
     Name = "Auto Move"
-})
+
 
 local AutoFarmGoldNodesSection = FarmingTab:MakeSection({
     Name = "Auto Farm Gold Nodes"
-})
+
 
 -- Create toggles
 local AutoEatToggle = AutoEatSection:MakeToggle({
